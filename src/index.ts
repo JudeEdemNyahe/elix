@@ -1,6 +1,6 @@
 import { ApolloServer } from "apollo-server";
 import { typeDefs } from "./schema";
-import { Query } from "./resolvers/index";
+import { Query, Mutation } from "./resolvers/index";
 import { Prisma, PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
@@ -15,6 +15,7 @@ export interface Context {
 
 const resolvers = {
   Query,
+  Mutation,
 };
 const context = {
   prisma,

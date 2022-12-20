@@ -44,6 +44,6 @@ export const typeDefs = gql`
 
   type PostPayload {
     userErrors: [UserError!]!
-    Post: Post #must be null to avoid error conflictions
+    post: Post #must be null to avoid error conflictions
   }
 `;
