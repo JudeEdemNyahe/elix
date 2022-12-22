@@ -2,12 +2,14 @@ import { gql } from "apollo-server";
 
 export const typeDefs = gql`
   type Query {
-    hello: String!
+    posts: [Post!]!
   }
 
   #Rule 13:Prefix mutation Names with Object for Alphabetical grouping
   type Mutation {
-    postCreate(title: String!, content: String!): PostPayload!
+    postCreate(post: PostInput!): PostPayload!
+    postUpdate(postId: ID!, post: PostInput!): PostPayload!
+    postDelete(postId: ID!): PostPayload!
   }
 
   #rule 15:Mutations should provide user business level Errors
@@ -45,5 +47,10 @@ export const typeDefs = gql`
   type PostPayload {
     userErrors: [UserError!]!
     post: Post #must be null to avoid error conflictions
+  }
+
+  input PostInput {
+    title: String
+    content: String
   }
 `;
