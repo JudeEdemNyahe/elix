@@ -10,6 +10,12 @@ export const typeDefs = gql`
     postCreate(post: PostInput!): PostPayload!
     postUpdate(postId: ID!, post: PostInput!): PostPayload!
     postDelete(postId: ID!): PostPayload!
+    signup(
+      credentials: CredentialsInput
+      name: String!
+      bio: String!
+    ): AuthPayload!
+    signin(credentials: CredentialsInput!): AuthPayload!
   }
 
   #rule 15:Mutations should provide user business level Errors
@@ -49,8 +55,18 @@ export const typeDefs = gql`
     post: Post #must be null to avoid error conflictions
   }
 
+  type AuthPayload {
+    userErrors: [UserError!]!
+    token: String
+  }
+
   input PostInput {
     title: String
     content: String
+  }
+
+  input CredentialsInput {
+    email: String!
+    password: String!
   }
 `;
