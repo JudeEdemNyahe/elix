@@ -20,7 +20,11 @@ export const Query = {
       },
     });
   },
-  posts: (_: any, __: any, { prisma }: Context) => {
+  posts: (
+    _: any,
+    { take, skip }: { take: number; skip: number },
+    { prisma }: Context
+  ) => {
     return prisma.post.findMany({
       where: {
         published: true,
@@ -30,6 +34,9 @@ export const Query = {
           createdAt: "desc",
         },
       ],
+
+      skip,
+      take,
     });
   },
 };
