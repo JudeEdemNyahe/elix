@@ -2,7 +2,9 @@ import { gql } from "apollo-server";
 
 export const typeDefs = gql`
   type Query {
+    Me: User
     posts: [Post!]!
+    profile(userId: ID!): Profile
   }
 
   #Rule 13:Prefix mutation Names with Object for Alphabetical grouping
@@ -10,6 +12,8 @@ export const typeDefs = gql`
     postCreate(post: PostInput!): PostPayload!
     postUpdate(postId: ID!, post: PostInput!): PostPayload!
     postDelete(postId: ID!): PostPayload!
+    postPublish(postId: ID!): PostPayload!
+    postUnpublish(postId: ID!): PostPayload!
     signup(
       credentials: CredentialsInput!
       name: String!
@@ -25,9 +29,9 @@ export const typeDefs = gql`
     id: ID!
     title: String!
     content: String!
-    createdSt: String!
+    createdAt: String!
     published: Boolean!
-    user: User!
+    user: User
   }
 
   #password is excluded, #Rule2-never expose implementation details
@@ -35,7 +39,6 @@ export const typeDefs = gql`
     id: ID!
     name: String!
     email: String!
-    profile: Profile
     posts: [Post!]!
   }
 
